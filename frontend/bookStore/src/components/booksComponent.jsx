@@ -1,7 +1,22 @@
-import list from "../../public/books.json";
+import { useEffect, useState } from "react";
 import Cards from "./cards";
+import axios from 'axios';
 
 function Books() {
+  const [book ,setBook] = useState([]);
+  useEffect(()=>{
+const getBooks= async()=>{
+  try{
+    const res = await axios.get("http://localhost:4001/api/books");
+    console.log(res.data);
+    setBook(res.data);
+  }
+  catch(error){
+    console.log("Error", error);
+  }
+};
+getBooks();
+  },[])
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       <div className="max-w-screen-2xl mx-auto md:px-10 px-4 pt-8">
@@ -24,7 +39,7 @@ function Books() {
 
         {/* Cards Section */}
         <div className="flex flex-wrap mt-6">
-          {list.map((item) => (
+          {book.map((item) => (
             <div className="p-1 w-full sm:w-1/2 md:w-1/3 lg:w-1/4"
               key={item.id}>
                 <Cards item={item} />

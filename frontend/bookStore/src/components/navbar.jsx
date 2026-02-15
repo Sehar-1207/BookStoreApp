@@ -34,15 +34,10 @@ const Navbar = () => {
       <li>
         <NavLink
           to="/"
-          className={
-            ({ isActive }) =>
-              `px-3 py-2 rounded-md font-semibold transition-colors duration-200
-     ${
-       isActive
-         ? "text-orange-500" // Active: orange text
-         : "text-black dark:text-white"
-     } // Inactive: black/white
-     hover:bg-orange-400 hover:text-white` // Hover: bg orange, text white
+          className={({ isActive }) =>
+            `px-3 py-2 rounded-md font-semibold transition-colors duration-200
+            ${isActive ? "text-orange-500" : "text-black dark:text-white"}
+            hover:bg-orange-400 hover:text-white`
           }
         >
           Home
@@ -51,15 +46,10 @@ const Navbar = () => {
       <li>
         <NavLink
           to="/about"
-          className={
-            ({ isActive }) =>
-              `px-3 py-2 rounded-md font-semibold transition-colors duration-200
-     ${
-       isActive
-         ? "text-orange-500" // Active: orange text
-         : "text-black dark:text-white"
-     } // Inactive: black/white
-     hover:bg-orange-400 hover:text-white` // Hover: bg orange, text white
+          className={({ isActive }) =>
+            `px-3 py-2 rounded-md font-semibold transition-colors duration-200
+            ${isActive ? "text-orange-500" : "text-black dark:text-white"}
+            hover:bg-orange-400 hover:text-white`
           }
         >
           About
@@ -68,15 +58,10 @@ const Navbar = () => {
       <li>
         <NavLink
           to="/books"
-          className={
-            ({ isActive }) =>
-              `px-3 py-2 rounded-md font-semibold transition-colors duration-200
-     ${
-       isActive
-         ? "text-orange-500" // Active: orange text
-         : "text-black dark:text-white"
-     } // Inactive: black/white
-     hover:bg-orange-400 hover:text-white` // Hover: bg orange, text white
+          className={({ isActive }) =>
+            `px-3 py-2 rounded-md font-semibold transition-colors duration-200
+            ${isActive ? "text-orange-500" : "text-black dark:text-white"}
+            hover:bg-orange-400 hover:text-white`
           }
         >
           Books
@@ -85,15 +70,10 @@ const Navbar = () => {
       <li>
         <NavLink
           to="/contactUs"
-          className={
-            ({ isActive }) =>
-              `px-3 py-2 rounded-md font-semibold transition-colors duration-200
-     ${
-       isActive
-         ? "text-orange-500" // Active: orange text
-         : "text-black dark:text-white"
-     } // Inactive: black/white
-     hover:bg-orange-400 hover:text-white` // Hover: bg orange, text white
+          className={({ isActive }) =>
+            `px-3 py-2 rounded-md font-semibold transition-colors duration-200
+            ${isActive ? "text-orange-500" : "text-black dark:text-white"}
+            hover:bg-orange-400 hover:text-white`
           }
         >
           Contact
@@ -117,7 +97,7 @@ const Navbar = () => {
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 w-52 p-2 shadow rounded-box
-            bg-white dark:bg-gray-800  hover:bg-orange-400 hover:text-white"
+            bg-white dark:bg-gray-800"
           >
             {navItems}
           </ul>
@@ -189,15 +169,15 @@ const Navbar = () => {
         </label>
 
         {/* Login */}
-     <Link to="/login">
-  <button
-    className="btn btn-sm md:btn-md
-    bg-orange-500 hover:bg-orange-400
-    text-white border-none font-bold"
-  >
-    Login
-  </button>
-</Link>
+        <Link to="/login">
+          <button
+            className="btn btn-sm md:btn-md
+            bg-orange-500 hover:bg-orange-400
+            text-white border-none font-bold"
+          >
+            Login
+          </button>
+        </Link>
       </div>
     </div>
   );
