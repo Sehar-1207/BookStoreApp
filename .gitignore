@@ -1,3 +1,5 @@
-"node_modules/" 
-"frontend/bookStore/node_modules/" 
-"backend/node_modules/"  
+node_modules/
+frontend/bookStore/node_modules/
+backend/node_modules/
+backend/.env
+frontend/bookstore/.env.local
