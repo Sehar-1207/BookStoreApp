@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import logo from "/images/logo1.png";
 import { NavLink, Link } from "react-router-dom"; 
+import Logout from './logout';
+import { authUser } from "../contex/authProvider";
 
 const Navbar = () => {
+  const [user] = authUser();
   // Theme state
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
@@ -169,7 +172,8 @@ const Navbar = () => {
         </label>
 
         {/* Login */}
-        <Link to="/login">
+        {user ? (<Logout/>):(
+<Link to="/login">
           <button
             className="btn btn-sm md:btn-md
             bg-orange-500 hover:bg-orange-400
@@ -178,6 +182,8 @@ const Navbar = () => {
             Login
           </button>
         </Link>
+        ) }
+        
       </div>
     </div>
   );

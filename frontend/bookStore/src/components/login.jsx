@@ -1,14 +1,51 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // ✅ Add useNavigate
 import { useForm } from "react-hook-form";
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { authUser } from '../contex/authProvider'; // ✅ Import authUser
 
 function Login() {
+  const navigate = useNavigate(); // ✅ Initialize navigate
+  const [user, setAuthUser] = authUser(); // ✅ Get auth context
+  
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = async(data) => {
+    const userInfo = {
+      email: data.email,
+      password: data.password
+    };
+    
+    await axios.post("http://localhost:4001/api/users/login", userInfo)
+      .then((res) => {
+        console.log(res.data);
+        if(res.data) {
+          toast.success('Login successful!'); // ✅ Fixed message
+          
+          // ✅ Save to localStorage
+          localStorage.setItem("user", JSON.stringify(res.data.user));
+          
+          // ✅ Update auth context
+          setAuthUser(res.data.user);
+          
+          // ✅ Redirect after 1 second
+          setTimeout(() => {
+            navigate("/");
+          }, 1000);
+        }
+      })
+      .catch((error) => {
+        if(error.response) {
+          console.log(error.response.data);
+          toast.error("Error: " + error.response.data.message);
+        }
+      });
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-slate-800">
       <div className="relative w-full max-w-md p-8 bg-white dark:bg-slate-900 text-black dark:text-white rounded-lg shadow-lg">
@@ -25,8 +62,6 @@ function Login() {
         {/* Login Form */}
         <form
           className="space-y-4"
-          method="post"
-          action="/login"
           onSubmit={handleSubmit(onSubmit)}
         >
           {/* Email Field */}

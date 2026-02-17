@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet, Navigate } from "react-router-dom";
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import HomePage from './pages/home';
@@ -7,6 +7,8 @@ import BooksPage from './pages/books';
 import ContactPage from './pages/contactUs';
 import Signup from './components/signup';
 import Login from './components/login';
+import toast, { Toaster } from 'react-hot-toast';
+import { authUser } from './contex/authProvider';
 
 // ScrollToTop component
 function ScrollToTop() {
@@ -19,12 +21,27 @@ function ScrollToTop() {
   return null;
 }
 
+// Protected Route Component
+function ProtectedRoute({ children }) {
+  const [user] = authUser(); // ✅ Changed 'User' to 'user' (lowercase)
+
+  if (!user) {
+    toast.error("Please login to access courses", {
+      id: 'login-required', // ✅ Prevents duplicate toasts
+    });
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+}
+
 // Layout component that wraps all pages
 function Layout() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 text-black dark:text-white">
       <ScrollToTop />
-      <Outlet /> {/* This renders the child routes */}
+      <Outlet />
+      <Toaster />
     </div>
   );
 }
@@ -43,7 +60,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/books",
-        element: <BooksPage />
+        element: (
+          <ProtectedRoute>
+            <BooksPage />
+          </ProtectedRoute>
+        )
       },
       {
         path: "/contactUs",

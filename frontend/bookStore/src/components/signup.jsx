@@ -1,6 +1,7 @@
-
 import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 
 function Signup() {
@@ -10,7 +11,29 @@ function Signup() {
     formState: { errors },
   } = useForm()
 
-  const onSubmit = (data) => console.log(data)
+  const onSubmit = async(data) => {
+    const userInfo ={
+      fullname:data.fullname,
+      email:data.email,
+      password:data.password
+    }
+    await axios.post("http://localhost:4001/api/users/signup", userInfo)
+    .then((res)=>{
+      console.log(res.data);
+      if(res.data){
+        toast.success('SignUp Successfully created!');
+
+      }
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+    }).catch(
+      (error)=>{
+       if(error.response){
+        console.log(error.response.data);
+        toast.error("error"+error.response.data.message);
+       }
+      }
+    );
+  };
   return (
     <div className="flex h-screen items-center justify-center bg-gray-100 dark:bg-slate-950">
       {/* Container Card */}
@@ -34,12 +57,12 @@ function Signup() {
             <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Username</label>
             <input
               type="text"
-              name="userName"
+              name="fullname"
               placeholder="Enter your full name"
               className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-orange-500 focus:border-none dark:bg-slate-800 dark:text-white dark:border-gray-700 transition-all"
-              {...register("userName", { required: true })}
+              {...register("fullname", { required: true })}
             />
-            {errors.userName && <span className="text-sm text-red-500">User Name is required</span>}
+            {errors.fullname && <span className="text-sm text-red-500">User Name is required</span>}
 
           </div>
 
