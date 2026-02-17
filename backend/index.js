@@ -6,6 +6,7 @@ import express from 'express';
 import connectDB from "./config/DbConnection.js";
 import booksRoutes from './routes/booksRoute.js';
 import usersRoutes from './routes/userRoute.js';
+import contactRoutes from './routes/contactRoute.js';
 import cors from 'cors';
 
 const app = express();
@@ -19,6 +20,7 @@ connectDB();
 app.use("/api/books", booksRoutes);
 
 app.use("/api/users",usersRoutes);
+app.use('/api', contactRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);
