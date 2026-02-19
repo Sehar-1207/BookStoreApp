@@ -56,6 +56,12 @@ This project is ideal for learning and demonstrating full-stack development usin
 - 📦 MongoDB Database Integration
 - ⚡ Responsive UI using React
 
+---
 
-git clone https://github.com/Sehar-1207/BookStoreApp.git/BookStoreApp.git
+## 🛠 Installation
+
+### 1️⃣ Clone the repo
+
+```bash
+git clone https://github.com/Sehar-1207/BookStoreApp.git
 cd BookStoreApp
