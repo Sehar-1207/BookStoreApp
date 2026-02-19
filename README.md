@@ -57,5 +57,5 @@ This project is ideal for learning and demonstrating full-stack development usin
 - ⚡ Responsive UI using React
 
 
-git clone https://github.com/your-username/BookStoreApp.git
+git clone https://github.com/Sehar-1207/BookStoreApp.git/BookStoreApp.git
 cd BookStoreApp
